@@ -12,11 +12,11 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('error') {
       parallel {
         stage('Create artifacts') {
           steps {
-            archiveArtifacts 'app/build/libs/'
+            archiveArtifacts 'app/templates/'
           }
         }
 
