@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('clone down') {
+        stage('Clone down') {
             steps {
                 stash excludes: '.git', name: 'code'
             }
         }
-        stage('build app') {
+        stage('Build') {
             agent any
             options {
                 skipDefaultCheckout(true)
@@ -17,7 +17,13 @@ pipeline {
                 sh label: '', script: 'docker build -t app .'
             }    
         }
-        stage('error') {
+        stage('Test')
+            agent any
+            steps {
+                unstash 'code'
+                sh label: '', script: 'python tests.py'
+            }
+        stage('Parallel') {
             parallel {
                 stage('Create artifacts') {
                     steps {
