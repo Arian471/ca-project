@@ -21,7 +21,7 @@ pipeline {
     stage('build app') {
       agent {
         docker {
-          image 'python'
+          image 'frolvlad/alpine-python3'
         }
 
       }
