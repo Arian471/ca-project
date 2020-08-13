@@ -11,9 +11,6 @@ pipeline {
         }
         stage('Build and Test') {
             agent any
-            options {
-                skipDefaultCheckout(true)
-            }
             steps {
                 unstash 'code'
                 sh label: '', script: 'ls -lah'
