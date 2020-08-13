@@ -21,6 +21,7 @@ pipeline {
             agent any
             steps {
                 unstash 'code'
+                sh label: '', script: 'RUN pip install -r requirements.txt'
                 sh label: '', script: 'python tests.py'
             }
         }
