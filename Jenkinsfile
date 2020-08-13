@@ -28,7 +28,7 @@ pipeline {
                 stage('Dockerize application') {
                     steps {
                         unstash 'code'
-                        echo 'epic docker'
+                        echo 'epicer docker'
                     }
                 }
             }
