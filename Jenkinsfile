@@ -17,12 +17,13 @@ pipeline {
                 sh label: '', script: 'docker build -t app .'
             }    
         }
-        stage('Test')
+        stage('Test') {
             agent any
             steps {
                 unstash 'code'
                 sh label: '', script: 'python tests.py'
             }
+        }
         stage('Parallel') {
             parallel {
                 stage('Create artifacts') {
