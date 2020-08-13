@@ -32,6 +32,9 @@ pipeline {
                     environment {
                         DOCKERCREDS = credentials("docker_login")
                     }
+                    when {
+                        branch 'master'
+                    }
                     steps {
                         unstash 'code'
                         sh label: '', script: 'docker build -t arian471/pythonapp .'
