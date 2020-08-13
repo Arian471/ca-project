@@ -35,7 +35,7 @@ pipeline {
       parallel {
         stage('Create artifacts') {
           steps {
-            archiveArtifacts 'app/templates/'
+            archiveArtifacts 'app/build/libs/'
           }
         }
 
