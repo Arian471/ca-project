@@ -25,7 +25,7 @@ pipeline {
                 stage('Create artifacts') {
                     steps {
                         unstash 'code'
-                        sh label: '', script: 'tar czf app.tar.gz app app.db config.py config.pyc create_db.py db_repository downgrade_down.py migrate_db.py run.py upgrade_db.py'
+                        sh label: '', script: 'tar czf app.tar.gz app app.db config.py create_db.py db_repository downgrade_down.py migrate_db.py run.py upgrade_db.py'
                         archiveArtifacts artifacts: 'app/build/libs/', allowEmptyArchive: true    
                     }
                 }
