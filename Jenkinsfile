@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        docker_username = "arian471"
+    }
     stages {
         stage('Clone down') {
             steps {
@@ -26,15 +29,17 @@ pipeline {
                     }
                 }
                 stage('Dockerize application') {
+                    environment {
+                        DOCKERCREDS = credentials("docker_login")
+                    }
                     steps {
                         unstash 'code'
-                        echo 'epicer docker'
+                        sh label: '', script: 'docker build -t arian471/pythonapp .'
+                        sh label: '', script: 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
+                        sh label: '', script: 'docker push arian471/pythonapp'
                     }
                 }
             }
         }
-    }
-    environment {
-        DOCKERCREDS = 'credentials(\'docker_login\')'
     }
 }
