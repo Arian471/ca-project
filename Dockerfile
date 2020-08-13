@@ -5,4 +5,6 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
+RUN python tests.py
+
 CMD python run.py

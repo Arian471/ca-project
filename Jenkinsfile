@@ -6,7 +6,7 @@ pipeline {
                 stash excludes: '.git', name: 'code'
             }
         }
-        stage('Build') {
+        stage('Build and Test') {
             agent any
             options {
                 skipDefaultCheckout(true)
@@ -17,15 +17,7 @@ pipeline {
                 sh label: '', script: 'docker build -t app .'
             }    
         }
-        stage('Test') {
-            agent any
-            steps {
-                unstash 'code'
-                sh label: '', script: 'pip install -r requirements.txt'
-                sh label: '', script: 'python tests.py'
-            }
-        }
-        stage('Parallel') {
+        stage('Artifacts + Dockerize') {
             parallel {
                 stage('Create artifacts') {
                     steps {
